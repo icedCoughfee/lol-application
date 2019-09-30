@@ -26,7 +26,7 @@ class ChampionCard extends Component {
             }}
             className="btn btn-primary"
           >
-            Explore
+            Learn more
           </Link>
         </div>
       </div>

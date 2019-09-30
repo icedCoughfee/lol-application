@@ -6,7 +6,9 @@ import {
 } from "../champions";
 import ChampionCard from "./championCard";
 import DropdownSelect from "./common/dropdownSelect";
+import SearchInput from "./common/searchBox";
 import _ from "lodash";
+import SearchBox from "./common/searchBox";
 
 class Champions extends Component {
   state = {
@@ -14,11 +16,16 @@ class Champions extends Component {
     championTags: getChampionTags(),
     stats: getChampionStatNames(),
     currentFilter: "All Champions",
-    currentSort: "Sort"
+    currentSort: "Sort",
+    searchQuery: ""
   };
   render() {
     const initialFilter = "All Champions";
     const initialSort = "Sort by stat";
+
+    // instead of altering that state.champions here, consider state.champions to be "all champions".
+    // we can then do our calculations here, filter, sort, search and then send them into render as to not change our base information.
+
     const rows = _.chunk(this.state.champions, 5);
     return (
       <React.Fragment>
@@ -41,7 +48,7 @@ class Champions extends Component {
         >
           Reset
         </button>
-
+        <SearchBox onChange={this.handleChampionSearch} />
         {rows.map((row, index) => (
           <div key={index} className="row m-2">
             {row.map(champion => (
@@ -80,6 +87,13 @@ class Champions extends Component {
       (champA, champB) => champA.stats[option] - champB.stats[option]
     );
     this.setState({ champions, currentSort: option });
+  };
+
+  handleChampionSearch = query => {
+    const champions = [...getChampions()].filter(champion =>
+      champion.name.toLowerCase().includes(query.toLowerCase())
+    );
+    this.setState({ champions, searchQuery: query });
   };
 }
 
