@@ -1,16 +1,18 @@
 import React, { Component } from "react";
-import _ from "lodash";
 import { Link } from "react-router-dom";
-import ChampionProfile from "./championProfile";
+import constants from "../constants/constants";
+import { translateInconsistency } from "../constants/inconsistencies";
+import _ from "lodash";
 
 class ChampionCard extends Component {
   render() {
     const { champion } = this.props;
     const pathname = `/champions/${champion.name}`;
+    const cleanChampId = translateInconsistency(champion.id);
     return (
       <div className="card" style={{ width: "24rem", margin: "auto" }}>
         <img
-          src={`../../img/champion/tiles/${champion.name}_0.jpg`}
+          src={`${constants.CHAMPION_TILES_URL}/${cleanChampId}_0.jpg`}
           className="card-img-top"
           alt=""
         />
