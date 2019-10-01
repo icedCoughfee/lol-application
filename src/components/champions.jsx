@@ -6,40 +6,58 @@ import {
 } from "../champions";
 import ChampionCard from "./championCard";
 import DropdownSelect from "./common/dropdownSelect";
-import SearchInput from "./common/searchBox";
-import _ from "lodash";
 import SearchBox from "./common/searchBox";
+import constants from "../constants/constants";
+import _ from "lodash";
 
 class Champions extends Component {
   state = {
     champions: getChampions(),
     championTags: getChampionTags(),
     stats: getChampionStatNames(),
-    currentFilter: "All Champions",
-    currentSort: "Sort",
+    currentFilter: constants.DEFAULT_FILTER,
+    currentSort: constants.DEFAULT_SORT,
     searchQuery: ""
   };
   render() {
-    const initialFilter = "All Champions";
-    const initialSort = "Sort by stat";
+    const {
+      champions,
+      championTags,
+      stats,
+      currentFilter,
+      currentSort,
+      searchQuery
+    } = this.state;
 
-    // instead of altering that state.champions here, consider state.champions to be "all champions".
-    // we can then do our calculations here, filter, sort, search and then send them into render as to not change our base information.
+    // search
+    let customizedChampions = [...champions].filter(champion =>
+      champion.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    // filter
+    if (currentFilter !== constants.DEFAULT_FILTER) {
+      customizedChampions = customizedChampions.filter(champion =>
+        champion.tags.includes(currentFilter) ? champion : null
+      );
+    }
+    // sort
+    customizedChampions = customizedChampions.sort(
+      (champA, champB) => champA.stats[currentSort] - champB.stats[currentSort]
+    );
+    const rows = _.chunk(customizedChampions, 5);
 
-    const rows = _.chunk(this.state.champions, 5);
     return (
       <React.Fragment>
         <DropdownSelect
-          options={this.state.championTags}
+          options={championTags}
           onDropdownChange={this.handleChampionFilter}
-          currentOption={this.state.currentFilter}
-          defaultOption={initialFilter}
+          currentOption={currentFilter}
+          defaultOption={constants.DEFAULT_FILTER}
         />
         <DropdownSelect
-          options={this.state.stats}
+          options={stats}
           onDropdownChange={this.handleChampionSort}
-          currentOption={this.state.currentSort} // genericize this option
-          defaultOption={initialSort}
+          currentOption={currentSort}
+          defaultOption={constants.DEFAULT_SORT}
         />
         <button
           type="button"
@@ -64,37 +82,16 @@ class Champions extends Component {
 
   handleChampionReset = () => {
     this.setState({
-      champions: [...getChampions()],
-      currentFilter: "All Champions",
-      currentSort: "Sort by stat"
+      currentFilter: constants.DEFAULT_FILTER,
+      currentSort: constants.DEFAULT_SORT
     });
   };
 
-  handleChampionFilter = option => {
-    let champions = [];
-    if (option === "All Champions") {
-      champions = getChampions();
-    } else {
-      champions = [...getChampions()].filter(champion =>
-        champion.tags.includes(option) ? champion : null
-      );
-    }
-    this.setState({ champions, currentFilter: option });
-  };
+  handleChampionFilter = option => this.setState({ currentFilter: option });
 
-  handleChampionSort = option => {
-    const champions = [...getChampions()].sort(
-      (champA, champB) => champA.stats[option] - champB.stats[option]
-    );
-    this.setState({ champions, currentSort: option });
-  };
+  handleChampionSort = option => this.setState({ currentSort: option });
 
-  handleChampionSearch = query => {
-    const champions = [...getChampions()].filter(champion =>
-      champion.name.toLowerCase().includes(query.toLowerCase())
-    );
-    this.setState({ champions, searchQuery: query });
-  };
+  handleChampionSearch = query => this.setState({ searchQuery: query });
 }
 
 export default Champions;
