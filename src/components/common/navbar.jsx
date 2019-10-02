@@ -4,7 +4,6 @@ import { Link, withRouter } from "react-router-dom";
 class Navbar extends Component {
   render() {
     const { navItems, location } = this.props;
-    console.log(location.pathname);
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <a className="navbar-brand" href="#">
@@ -51,9 +50,15 @@ class Navbar extends Component {
       </nav>
     );
   }
+<<<<<<< HEAD
 
   navItemActive = (item, appLocation) =>
     item.path === appLocation ? "active" : "";
 }
 
 export default withRouter(Navbar);
+=======
+}
+
+export default Navbar;
+>>>>>>> d597708ef47d71bf6e1e32c3c72ce1258b0bc1e4
