@@ -13,7 +13,7 @@ class DropdownSelect extends Component {
     } = this.props;
     const classes = this.state.isExpanded ? "show" : "";
     return (
-      <div className={`dropdown ${classes}`}>
+      <div className={`dropdown m-2 ${classes}`}>
         <button
           className="btn btn-primary dropdown-toggle"
           type="button"

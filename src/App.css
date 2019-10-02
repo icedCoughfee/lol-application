@@ -20,3 +20,13 @@
 .App-link {
   color: #09d3ac;
 }
+
+/* custom css */
+.container-dark {
+  background-color: #26262b;
+}
+
+.champion-card:hover {
+  background-color: #f8f8f8;
+  border: 2px solid #ffd700;
+}

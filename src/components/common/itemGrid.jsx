@@ -26,7 +26,8 @@ class ItemGrid extends Component {
       currentSortProperty: defaultSort,
       sortBaseProperties,
       searchProperty,
-      cardType: CardType
+      cardType: CardType,
+      customCardClass
     } = this.props;
 
     // search
@@ -51,31 +52,33 @@ class ItemGrid extends Component {
 
     return (
       <React.Fragment>
-        <DropdownSelect
-          options={itemFilterOptions}
-          onDropdownChange={this.handleItemFilter}
-          currentOption={currentFilter}
-          defaultOption={defaultFilter}
-        />
-        <DropdownSelect
-          options={sortOptions}
-          onDropdownChange={this.handleItemSort}
-          currentOption={currentSortProperty}
-          defaultOption={defaultSort}
-        />
-        <button
-          type="button"
-          className="btn btn-danger"
-          onClick={this.handleItemReset}
-        >
-          Reset
-        </button>
-        <SearchBox value={searchQuery} onChange={this.handleItemSearch} />
+        <div className="btn-group">
+          <DropdownSelect
+            options={itemFilterOptions}
+            onDropdownChange={this.handleItemFilter}
+            currentOption={currentFilter}
+            defaultOption={defaultFilter}
+          />
+          <DropdownSelect
+            options={sortOptions}
+            onDropdownChange={this.handleItemSort}
+            currentOption={currentSortProperty}
+            defaultOption={defaultSort}
+          />
+          <button
+            type="button"
+            className="btn btn-danger m-2"
+            onClick={this.handleItemReset}
+          >
+            Reset
+          </button>
+          <SearchBox value={searchQuery} onChange={this.handleItemSearch} />
+        </div>
         {rows.map((row, index) => (
           <div key={index} className="row m-2">
             {row.map(item => (
               <div key={item.key} className="col">
-                <CardType item={item} />
+                <CardType item={item} customCardClass={customCardClass} />
               </div>
             ))}
           </div>

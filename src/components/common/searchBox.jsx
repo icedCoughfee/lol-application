@@ -6,7 +6,7 @@ class SearchBox extends Component {
     return (
       <input
         type="email"
-        className="form-control"
+        className="form-control m-2"
         id="exampleInputEmail1"
         aria-describedby="emailHelp"
         placeholder="Search Champions"

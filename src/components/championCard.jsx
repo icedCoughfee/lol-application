@@ -20,6 +20,7 @@ class ChampionCard extends Component {
         imgSrc={imgSrc}
         linkText={"Learn More"}
         linkTo={pathname}
+        customCardClass={"champion-card"}
       />
     );
   }
