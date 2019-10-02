@@ -4,7 +4,7 @@ import _ from "lodash";
 class ChampionProfile extends Component {
   render() {
     const { history, location, match } = this.props;
-    const { champion } = location.state;
+    const { item: champion } = location.state;
 
     const titleCaseName = _.words(champion.title)
       .map(word => _.capitalize(word))
@@ -13,7 +13,7 @@ class ChampionProfile extends Component {
     const bg =
       "https://lolstatic-a.akamaihd.net/game-info/1.1.9/images/champion/backdrop/bg-ahri.jpg";
     const styles = {
-      backgroundImage: `url(${bg ? bg : ""})`
+      backgroundImage: `url(${bg ? bg : ""})`,
     };
 
     // scale

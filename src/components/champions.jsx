@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import {
   getChampions,
   getChampionTags,
-  getChampionStatNames
+  getChampionStatNames,
 } from "../champions";
 import ChampionCard from "./championCard";
 import DropdownSelect from "./common/dropdownSelect";
@@ -17,16 +17,20 @@ class Champions extends Component {
     stats: getChampionStatNames(),
     currentFilter: constants.DEFAULT_FILTER,
     currentSort: constants.DEFAULT_SORT,
-    searchQuery: ""
+    searchQuery: "",
   };
   render() {
+    // TODO: extract this as a component intended to be on multiple pages
+    // how many filters are we allowed to have?
+    // should this be an extendable component or should we just pass parameters through this component?
+    // should the original component just be a grid component that creates cards?
     const {
       champions,
       championTags,
       stats,
       currentFilter,
       currentSort,
-      searchQuery
+      searchQuery,
     } = this.state;
 
     // search
@@ -83,7 +87,7 @@ class Champions extends Component {
   handleChampionReset = () => {
     this.setState({
       currentFilter: constants.DEFAULT_FILTER,
-      currentSort: constants.DEFAULT_SORT
+      currentSort: constants.DEFAULT_SORT,
     });
   };
 
