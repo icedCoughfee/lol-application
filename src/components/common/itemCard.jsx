@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import _ from "lodash";
 
-const GenericCard = props => {
+const ItemCard = props => {
   const { item, title, description, imgSrc, linkText, linkTo } = props;
   return (
     <div className="card" style={{ width: "24rem", margin: "auto" }}>
@@ -13,7 +13,7 @@ const GenericCard = props => {
         <Link
           to={{
             pathname: linkTo,
-            state: { item: item },
+            state: { item: item }
           }}
           className="btn btn-primary"
         >
@@ -24,4 +24,4 @@ const GenericCard = props => {
   );
 };
 
-export default GenericCard;
+export default ItemCard;
