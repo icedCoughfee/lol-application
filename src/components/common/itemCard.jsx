@@ -10,21 +10,29 @@ const ItemCard = props => {
     imgSrc,
     linkText,
     linkTo,
-    customCardClass
+    customCardClass,
   } = props;
   return (
     <div
       className={`card ${customCardClass}`}
       style={{ width: "24rem", margin: "auto" }}
     >
-      <img src={imgSrc} className="card-img-top" alt="" />
+      <Link
+        to={{
+          pathname: linkTo,
+          state: { item: item },
+        }}
+        className="btn btn-primary"
+      >
+        <img src={imgSrc} className="card-img-top" alt="" />
+      </Link>
       <div className="card-body">
         <h5 className="card-title">{title}</h5>
         <p className="card-text">{description}</p>
         <Link
           to={{
             pathname: linkTo,
-            state: { item: item }
+            state: { item: item },
           }}
           className="btn btn-primary"
         >
