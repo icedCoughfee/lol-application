@@ -22,7 +22,7 @@ const ItemCard = props => {
           pathname: linkTo,
           state: { item: item },
         }}
-        className="btn btn-primary"
+        className=""
       >
         <img src={imgSrc} className="card-img-top" alt="" />
       </Link>
