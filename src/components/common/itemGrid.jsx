@@ -9,14 +9,14 @@ class ItemGrid extends Component {
     itemFilterOptions: this.props.filterOptions,
     currentFilter: this.props.currentFilter,
     currentSortProperty: this.props.currentSortProperty,
-    searchQuery: ""
+    searchQuery: "",
   };
   render() {
     const {
       items,
       currentFilter,
       currentSortProperty,
-      searchQuery
+      searchQuery,
     } = this.state;
 
     const {
@@ -27,12 +27,24 @@ class ItemGrid extends Component {
       sortBaseProperties,
       searchProperty,
       cardType: CardType,
-      customCardClass
+      customCardClass,
     } = this.props;
 
     // search
-    let customizedItems = [...items].filter(item =>
-      item[searchProperty].toLowerCase().includes(searchQuery.toLowerCase())
+    let customizedItems = [...items].filter(
+      item => {
+        // console.log(item, searchProperty);
+        const itemVal = _.get(item, searchProperty);
+        console.log(itemVal);
+        try {
+          return itemVal
+            ? itemVal.toLowerCase().includes(searchQuery.toLowerCase())
+            : false;
+        } catch (e) {
+          console.log("XD");
+        }
+      }
+      // item[searchProperty].toLowerCase().includes(searchQuery.toLowerCase())
     );
     // filter (assumes item has a "tags" property)
     if (currentFilter !== defaultFilter) {
@@ -107,7 +119,7 @@ class ItemGrid extends Component {
     this.setState({
       currentFilter: this.props.currentFilter,
       currentSortProperty: this.props.currentSortProperty,
-      searchQuery: ""
+      searchQuery: "",
     });
   };
 
