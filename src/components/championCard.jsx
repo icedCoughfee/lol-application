@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import constants from "../constants/constants";
 import { translateInconsistency } from "../constants/inconsistencies";
 import ItemCard from "./common/itemCard";
-import { Link } from "react-router-dom";
+import SimpleLink from "./common/simpleLink";
 import _ from "lodash";
 
 class ChampionCard extends Component {
@@ -25,15 +25,9 @@ class ChampionCard extends Component {
       >
         <h5 className="card-title">{champTitle}</h5>
         <p className="card-text">{champion.title}</p>
-        <Link
-          to={{
-            pathname: pathname,
-            state: { item: champion }
-          }}
-          className="btn btn-primary"
-        >
-          {"Learn More"}
-        </Link>
+        <SimpleLink linkTo={pathname} item={champion} classes="btn btn-primary">
+          {pathname ? "Learn More" : ""}
+        </SimpleLink>
       </ItemCard>
     );
   }

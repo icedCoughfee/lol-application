@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import _ from "lodash";
+import SimpleLink from "./simpleLink";
+import { link } from "fs";
 
 const ItemCard = props => {
   const { item, imgSrc, linkTo, customCardClass } = props;
@@ -9,7 +11,10 @@ const ItemCard = props => {
       className={`card ${customCardClass}`}
       style={{ width: "24rem", margin: "auto" }}
     >
-      <Link
+      <SimpleLink linkTo={linkTo} item={item} className="">
+        <img src={imgSrc} className="card-img-top" alt="" />
+      </SimpleLink>
+      {/* <Link
         to={{
           pathname: linkTo,
           state: { item: item }
@@ -17,7 +22,7 @@ const ItemCard = props => {
         className=""
       >
         <img src={imgSrc} className="card-img-top" alt="" />
-      </Link>
+      </Link> */}
       <div className="card-body">{props.children}</div>
     </div>
   );
