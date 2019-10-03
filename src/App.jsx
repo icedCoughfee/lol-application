@@ -10,8 +10,8 @@ class App extends Component {
   state = {
     navItems: [
       { name: "Champions", path: "/champions" },
-      { name: "Summoners", path: "/summoners" },
-    ],
+      { name: "Summoners", path: "/summoners" }
+    ]
   };
   render() {
     return (
@@ -26,7 +26,7 @@ class App extends Component {
                   render={props => <ChampionProfile {...props} />}
                 />
                 <Route path="/champions" component={Champions} />
-                <Route path="/summoners/:name" component={SummonerProfile} />
+                <Route path="/summoner/:name" component={SummonerProfile} />
                 <Route path="/" component={Champions} />
               </Switch>
             </div>

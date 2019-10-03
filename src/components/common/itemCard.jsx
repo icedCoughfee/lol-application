@@ -14,15 +14,6 @@ const ItemCard = props => {
       <SimpleLink linkTo={linkTo} item={item} className="">
         <img src={imgSrc} className="card-img-top" alt="" />
       </SimpleLink>
-      {/* <Link
-        to={{
-          pathname: linkTo,
-          state: { item: item }
-        }}
-        className=""
-      >
-        <img src={imgSrc} className="card-img-top" alt="" />
-      </Link> */}
       <div className="card-body">{props.children}</div>
     </div>
   );

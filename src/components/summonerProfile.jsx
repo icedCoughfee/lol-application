@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { getChampionMastery } from "../fakeSummoners";
 import { getChampionById, getChampionTags } from "../champions";
-import ChampionCard from "./championCard";
+import MasteryCard from "./masteryCard";
 import { getMasteryTags } from "../mastery";
 import ItemGrid from "./common/itemGrid";
 import constants from "../constants/constants";
@@ -20,11 +20,11 @@ class SummonerProfile extends Component {
         itemFilterOptions={getChampionTags()}
         currentFilter={constants.DEFAULT_FILTER}
         sortOptions={getMasteryTags()}
-        currentSortProperty={constants.DEFAULT_SORT}
+        currentSortProperty={"Sort"}
         sortBaseProperties={"mastery"}
         searchQuery={""}
         searchProperty={"name"}
-        cardType={ChampionCard}
+        cardType={MasteryCard}
         customCardClass={"champion-card"}
       />
     );

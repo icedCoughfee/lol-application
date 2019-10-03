@@ -30,3 +30,7 @@
   background-color: #f8f8f8;
   border: 2px solid #ffd700;
 }
+
+.progress {
+  height: 2rem;
+}
