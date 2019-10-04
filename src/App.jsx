@@ -1,10 +1,10 @@
 import React, { Component } from "react";
+import Navbar from "./components/common/navbar";
+import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import Champions from "./components/champions";
 import ChampionProfile from "./components/championProfile";
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
-import Navbar from "./components/common/navbar";
-import "./App.css";
 import SummonerProfile from "./components/summonerProfile";
+import "./App.css";
 
 class App extends Component {
   state = {
@@ -17,9 +17,9 @@ class App extends Component {
     return (
       <React.Fragment>
         <BrowserRouter>
-          <div className="container-dark">
+          <div className="main-container">
             <Navbar navItems={this.state.navItems} />
-            <div className="container-fluid">
+            <div className="container-fluid container-dark ">
               <Switch>
                 <Route
                   path="/champions/:name"

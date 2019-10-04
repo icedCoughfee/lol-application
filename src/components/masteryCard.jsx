@@ -32,9 +32,7 @@ class MasteryCard extends Component {
         <h2>
           <b>LEVEL {championLevel}</b>
         </h2>
-        <p>
-          <h4>{championPoints} Champion Points</h4>
-        </p>
+        <h4>{championPoints} Champion Points</h4>
         <p>Last Played: {this.getLastPlayed()}</p>
         <ProgressBar completionPct={progress} />
       </ItemCard>

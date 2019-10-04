@@ -22,6 +22,10 @@
 }
 
 /* custom css */
+.main-container {
+  height: 100vh;
+}
+
 .container-dark {
   background-color: #26262b;
 }

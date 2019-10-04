@@ -1,34 +1,34 @@
 import React, { Component } from "react";
-import { getChampionMastery } from "../fakeSummoners";
-import { getChampionById, getChampionTags } from "../champions";
-import MasteryCard from "./masteryCard";
-import { getMasteryTags } from "../mastery";
-import ItemGrid from "./common/itemGrid";
-import constants from "../constants/constants";
+import Fade from "react-bootstrap/Fade";
+import MasteryGrid from "./masteryGrid";
 
 class SummonerProfile extends Component {
+  state = {
+    masteryVisbility: false
+  };
   render() {
-    const masteries = [...getChampionMastery()].map(mastery => {
-      const masteryWithCmastery = { ...mastery };
-      const champion = { ...getChampionById(mastery.championId) };
-      champion["mastery"] = masteryWithCmastery;
-      return champion;
-    });
     return (
-      <ItemGrid
-        items={masteries}
-        itemFilterOptions={getChampionTags()}
-        currentFilter={constants.DEFAULT_FILTER}
-        sortOptions={getMasteryTags()}
-        currentSortProperty={"Sort"}
-        sortBaseProperties={"mastery"}
-        searchQuery={""}
-        searchProperty={"name"}
-        cardType={MasteryCard}
-        customCardClass={"champion-card"}
-      />
+      <React.Fragment>
+        <button
+          className="btn btn-primary m-2"
+          onClick={() => this.handleToggleMasteryVisibility()}
+          aria-controls="masteryGrid"
+          aria-expanded={this.state.masteryVisbility}
+        >
+          Champion Mastery
+        </button>
+        <Fade in={this.state.masteryVisbility}>
+          <div className="fade" id="masteryGrid">
+            <MasteryGrid />
+          </div>
+        </Fade>
+      </React.Fragment>
     );
   }
+
+  handleToggleMasteryVisibility = () => {
+    this.setState({ masteryVisbility: !this.state.masteryVisbility });
+  };
 }
 
 export default SummonerProfile;
