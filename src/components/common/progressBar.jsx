@@ -1,9 +1,13 @@
 import React from "react";
 
 const ProgressBar = props => {
-  const { completionPct } = props;
+  const { label, completionPct } = props;
   const classes = isComplete(completionPct) ? "bg-success" : "bg-warning";
-  const label = isComplete(completionPct) ? "Complete" : `${completionPct}%`;
+  const btnLabel = isComplete(completionPct)
+    ? label
+      ? label
+      : "Complete"
+    : `${completionPct}%`;
   return (
     <div className="progress">
       <div
@@ -14,7 +18,7 @@ const ProgressBar = props => {
         aria-valuemin="0"
         aria-valuemax="100"
       >
-        {label}
+        <span className="progress-bar-label">{btnLabel}</span>
       </div>
     </div>
   );

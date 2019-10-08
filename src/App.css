@@ -30,11 +30,39 @@
   background-color: #26262b;
 }
 
-.champion-card:hover {
-  background-color: #f8f8f8;
-  border: 2px solid #ffd700;
+.card {
+  max-width: 14rem;
+  margin: auto
 }
 
-.progress {
+.champion-card:hover {
+  background-color: #f8f8f8;
+  border: 1px solid #ffd700;
+}
+
+.mastery-card .card-body span {
+  display: block;
+}
+
+.mastery-card .progress {
   height: 2rem;
+  margin-top: 10px
+}
+
+.mastery-card .progress-bar-label {
+  color: black
+}
+
+.basic-banner {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-y: 50%;
+}
+
+.bold-light {
+  font-weight: 500
+}
+
+.bolder {
+  font-weight: 700
 }

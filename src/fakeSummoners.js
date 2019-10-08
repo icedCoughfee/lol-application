@@ -1,3 +1,7 @@
+import {
+    getChampionById
+} from "./champions";
+
 const summoners = [{
     id: "KHCaBkQkFzqa-paZf_KOYpkGVJa7a7JVsGyxtgKd4jqp",
     accountId: "ANN1XAsdom_7Br6bn_2U-dcAqZus7V0Na08wKCFoatfN5g",
@@ -1598,6 +1602,11 @@ const championMastery = [{
 
 export function getChampionMastery() {
     return championMastery;
+}
+
+export function getMostPlayedChampion() {
+    const mastery = [...getChampionMastery()].sort((a, b) => b.championPoints - a.championPoints);
+    return getChampionById(mastery[0].championId)
 }
 
 function getSummoners() {

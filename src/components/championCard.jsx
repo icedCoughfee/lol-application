@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import constants from "../constants/constants";
 import { translateInconsistency } from "../constants/inconsistencies";
 import ItemCard from "./common/itemCard";
 import SimpleLink from "./common/simpleLink";

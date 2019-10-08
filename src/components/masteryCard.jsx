@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import constants from "../constants/constants";
 import { translateInconsistency } from "../constants/inconsistencies";
 import ItemCard from "./common/itemCard";
 import ProgressBar from "./common/progressBar";
@@ -11,7 +10,6 @@ class MasteryCard extends Component {
     const {
       championLevel,
       championPoints,
-      lastPlayTime,
       championPointsSinceLastLevel,
       championPointsUntilNextLevel,
     } = champion.mastery;
@@ -27,14 +25,12 @@ class MasteryCard extends Component {
       <ItemCard
         item={champion}
         imgSrc={imgSrc}
-        customCardClass={"champion-card"}
+        customCardClass={"mastery-card champion-card"}
       >
-        <h2>
-          <b>LEVEL {championLevel}</b>
-        </h2>
-        <h4>{championPoints} Champion Points</h4>
-        <p>Last Played: {this.getLastPlayed()}</p>
-        <ProgressBar completionPct={progress} />
+        <span className="bolder">LEVEL {championLevel}</span>
+        <span className="bold-light">{championPoints} Champion Points</span>
+        <span>Last Played: {this.getLastPlayed()}</span>
+        <ProgressBar label={"Max"} completionPct={progress} />
       </ItemCard>
     );
   }
