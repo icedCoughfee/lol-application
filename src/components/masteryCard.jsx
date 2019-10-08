@@ -13,10 +13,10 @@ class MasteryCard extends Component {
       championPoints,
       lastPlayTime,
       championPointsSinceLastLevel,
-      championPointsUntilNextLevel
+      championPointsUntilNextLevel,
     } = champion.mastery;
     const cleanChampId = translateInconsistency(champion.id);
-    const imgSrc = `${constants.CHAMPION_TILES_URL}/${cleanChampId}_0.jpg`;
+    const imgSrc = `${process.env.REACT_APP_CHAMPION_TILES_URL}/${cleanChampId}_0.jpg`;
 
     // champion mastery progress
     const progress = Math.floor(

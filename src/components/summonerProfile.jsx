@@ -4,7 +4,7 @@ import MasteryGrid from "./masteryGrid";
 
 class SummonerProfile extends Component {
   state = {
-    masteryVisbility: false
+    masteryVisbility: false,
   };
   render() {
     return (
