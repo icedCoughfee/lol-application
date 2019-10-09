@@ -4,10 +4,12 @@ import MasteryGrid from "./masteryGrid";
 import Banner from "./common/banner";
 import { getMostPlayedChampion } from "../fakeSummoners";
 import { translateInconsistency } from "../constants/inconsistencies";
+import MatchHistory from "./matchHistory";
 
 class SummonerProfile extends Component {
   state = {
     masteryVisbility: false,
+    matchHistoryVisibility: false,
   };
   render() {
     const champion = getMostPlayedChampion();
@@ -24,23 +26,40 @@ class SummonerProfile extends Component {
         />
         <button
           className="btn btn-primary m-2"
-          onClick={() => this.handleToggleMasteryVisibility()}
+          onClick={() => this.handleToggleButtonContent("masteryVisbility")}
           aria-controls="masteryGrid"
           aria-expanded={this.state.masteryVisbility}
         >
           Champion Mastery
+        </button>
+        <button
+          className="btn btn-primary m-2"
+          onClick={() =>
+            this.handleToggleButtonContent("matchHistoryVisibility")
+          }
+          aria-controls="matchHistory"
+          aria-expanded={this.state.matchHistoryVisibility}
+        >
+          Match History
         </button>
         <Fade in={this.state.masteryVisbility}>
           <div className="fade" id="masteryGrid">
             <MasteryGrid />
           </div>
         </Fade>
+        <Fade in={this.state.matchHistoryVisibility}>
+          <div className="fade" id="matchHistory">
+            <MatchHistory />
+          </div>
+        </Fade>
       </React.Fragment>
     );
   }
 
-  handleToggleMasteryVisibility = () => {
-    this.setState({ masteryVisbility: !this.state.masteryVisbility });
+  handleToggleButtonContent = stateElementVisibility => {
+    this.setState({
+      [stateElementVisibility]: !this.state[stateElementVisibility],
+    });
   };
 }
 
