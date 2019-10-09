@@ -7,7 +7,7 @@ class CollapseAccordion extends Component {
     const { items, id, labelProperty, ContentType } = this.props;
     if (items.length) {
       return (
-        <div className="accordion" id={id}>
+        <div className="accordion m-2" id={id}>
           {items.map((item, index) => {
             const controlEleName = `${id}Collapse_${index}`;
             const controlEleId = `${id}Heading_${index}`;
