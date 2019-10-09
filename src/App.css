@@ -30,7 +30,7 @@
   background-color: #26262b;
 }
 
-.card {
+[class$='-card'] {
   max-width: 14rem;
   margin: auto
 }
