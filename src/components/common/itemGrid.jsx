@@ -51,8 +51,6 @@ class ItemGrid extends Component {
       customizedItems
     );
 
-    const rows = _.chunk(customizedItems, 5);
-
     return (
       <React.Fragment>
         <div className="btn-group">
@@ -77,15 +75,15 @@ class ItemGrid extends Component {
           </button>
           <SearchBox value={searchQuery} onChange={this.handleItemSearch} />
         </div>
-        {rows.map((row, index) => (
-          <div key={index} className="row m-2">
-            {row.map((item, index) => (
-              <div key={index} className="col">
-                <CardType item={item} customCardClass={customCardClass} />
-              </div>
-            ))}
-          </div>
-        ))}
+        <div className="card-container">
+          {customizedItems.map((item, index) => (
+            <CardType
+              key={index}
+              item={item}
+              customCardClass={customCardClass}
+            />
+          ))}
+        </div>
       </React.Fragment>
     );
   }
