@@ -19,7 +19,7 @@ class App extends Component {
         <BrowserRouter>
           <div className="main-container">
             <Navbar navItems={this.state.navItems} />
-            <div className="container-fluid container-dark ">
+            <div className="container-fluid container-dark">
               <Switch>
                 <Route
                   path="/champions/:name"
