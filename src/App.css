@@ -31,6 +31,13 @@
   background-color: #26262b;
 }
 
+.home {
+  justify-content: center;
+  display: flex;
+  height: calc(100vh - 56px);
+  align-items: center;
+}
+
 .card-container {
   grid-template-columns: repeat(auto-fill, 14rem);
   grid-auto-rows: auto;

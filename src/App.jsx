@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import Navbar from "./components/common/navbar";
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Champions from "./components/champions";
 import ChampionProfile from "./components/championProfile";
 import SummonerProfile from "./components/summonerProfile";
+import Home from "./components/home";
 import "./App.css";
 
 class App extends Component {
@@ -27,7 +28,7 @@ class App extends Component {
                 />
                 <Route path="/champions" component={Champions} />
                 <Route path="/summoner/:name" component={SummonerProfile} />
-                <Route path="/" component={Champions} />
+                <Route path="/" component={Home} />
               </Switch>
             </div>
           </div>
