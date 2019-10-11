@@ -12,7 +12,8 @@ class SummonerProfile extends Component {
     matchHistoryVisibility: false,
   };
   render() {
-    const champion = getMostPlayedChampion();
+    const { champions } = this.props;
+    const champion = getMostPlayedChampion(champions);
     const { name, title, id } = champion;
     const cleanChampId = translateInconsistency(id);
     const imgSrc = `${process.env.REACT_APP_CHAMPION_SPLASH_URL}/${cleanChampId}_0.jpg`;
@@ -44,7 +45,7 @@ class SummonerProfile extends Component {
         </button>
         <Fade in={this.state.masteryVisbility}>
           <div className="fade" id="masteryGrid">
-            <MasteryGrid />
+            <MasteryGrid champions={champions} />
           </div>
         </Fade>
         <Fade in={this.state.matchHistoryVisibility}>

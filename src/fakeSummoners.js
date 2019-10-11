@@ -1604,9 +1604,9 @@ export function getChampionMastery() {
     return championMastery;
 }
 
-export function getMostPlayedChampion() {
+export function getMostPlayedChampion(champions) {
     const mastery = [...getChampionMastery()].sort((a, b) => b.championPoints - a.championPoints);
-    return getChampionById(mastery[0].championId)
+    return getChampionById(champions, mastery[0].championId)
 }
 
 function getSummoners() {

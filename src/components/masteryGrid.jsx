@@ -8,9 +8,10 @@ import constants from "../constants/constants";
 
 class MasteryGrid extends Component {
   render() {
+    const { champions } = this.props;
     const masteries = [...getChampionMastery()].map(mastery => {
       const masteryWithCmastery = { ...mastery };
-      const champion = { ...getChampionById(mastery.championId) };
+      const champion = { ...getChampionById(champions, mastery.championId) };
       champion["mastery"] = masteryWithCmastery;
       return champion;
     });

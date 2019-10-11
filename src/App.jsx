@@ -4,17 +4,29 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Champions from "./components/champions";
 import ChampionProfile from "./components/championProfile";
 import SummonerProfile from "./components/summonerProfile";
+import { getChampions } from "./services/championService";
 import Home from "./components/home";
+import _ from "lodash";
 import "./App.css";
 
 class App extends Component {
   state = {
+    version: "",
+    champions: [],
     navItems: [
       { name: "Champions", path: "/champions" },
-      { name: "Summoners", path: "/summoners" }
-    ]
+      { name: "Summoners", path: "/summoners" },
+    ],
   };
+
+  async componentDidMount() {
+    const { data: getChampionResponse } = await getChampions();
+    const { data: champions } = getChampionResponse;
+    this.setState({ champions: _.values(champions) });
+  }
+
   render() {
+    const { champions } = this.state;
     return (
       <React.Fragment>
         <BrowserRouter>
@@ -26,7 +38,10 @@ class App extends Component {
                   path="/champions/:name"
                   render={props => <ChampionProfile {...props} />}
                 />
-                <Route path="/champions" component={Champions} />
+                <Route
+                  path="/champions"
+                  render={() => <Champions champions={champions} />}
+                />
                 <Route path="/summoner/:name" component={SummonerProfile} />
                 <Route path="/" component={Home} />
               </Switch>

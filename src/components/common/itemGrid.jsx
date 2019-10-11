@@ -5,21 +5,16 @@ import _ from "lodash";
 
 class ItemGrid extends Component {
   state = {
-    items: this.props.items,
     itemFilterOptions: this.props.filterOptions,
     currentFilter: this.props.currentFilter,
     currentSortProperty: this.props.currentSortProperty,
-    searchQuery: ""
+    searchQuery: "",
   };
   render() {
-    const {
-      items,
-      currentFilter,
-      currentSortProperty,
-      searchQuery
-    } = this.state;
+    const { currentFilter, currentSortProperty, searchQuery } = this.state;
 
     const {
+      items,
       itemFilterOptions,
       currentFilter: defaultFilter,
       sortOptions,
@@ -27,7 +22,7 @@ class ItemGrid extends Component {
       sortBaseProperties,
       searchProperty,
       cardType: CardType,
-      customCardClass
+      customCardClass,
     } = this.props;
 
     // search
@@ -100,7 +95,7 @@ class ItemGrid extends Component {
     this.setState({
       currentFilter: this.props.currentFilter,
       currentSortProperty: this.props.currentSortProperty,
-      searchQuery: ""
+      searchQuery: "",
     });
   };
 

@@ -1,9 +1,5 @@
 import React, { Component } from "react";
-import {
-  getChampions,
-  getChampionTags,
-  getChampionStatNames
-} from "../champions";
+import { getChampionTags, getChampionStatNames } from "../champions";
 import constants from "../constants/constants";
 import _ from "lodash";
 import ItemGrid from "./common/itemGrid";
@@ -11,12 +7,13 @@ import ChampionCard from "./championCard";
 
 class Champions extends Component {
   render() {
+    const { champions } = this.props;
     return (
       <ItemGrid
-        items={getChampions()}
+        items={champions}
         itemFilterOptions={getChampionTags()}
         currentFilter={constants.DEFAULT_FILTER}
-        sortOptions={getChampionStatNames()}
+        sortOptions={getChampionStatNames(champions)}
         currentSortProperty={constants.DEFAULT_SORT}
         sortBaseProperties={"stats"}
         searchQuery={""}
@@ -30,7 +27,7 @@ class Champions extends Component {
   handleChampionReset = () => {
     this.setState({
       currentFilter: constants.DEFAULT_FILTER,
-      currentSort: constants.DEFAULT_SORT
+      currentSort: constants.DEFAULT_SORT,
     });
   };
 
