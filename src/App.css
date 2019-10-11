@@ -1,3 +1,7 @@
+body {
+  color: white;
+}
+
 .App {
   text-align: center;
 }
@@ -31,6 +35,12 @@
   background-color: #26262b;
 }
 
+nav img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
 .home {
   justify-content: center;
   display: flex;
@@ -49,6 +59,7 @@
 
 [class$="-card"] {
   max-width: 14rem;
+  color: black;
 }
 
 .champion-card:hover {

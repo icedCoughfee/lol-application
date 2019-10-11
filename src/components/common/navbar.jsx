@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
+import constants from "../../constants/constants";
 
 class Navbar extends Component {
   render() {
     const { navItems, location } = this.props;
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a className="navbar-brand" href="#">
-          Navbar
-        </a>
+        <Link to="/" className="navbar-brand">
+          <img src={constants.DEFAULT_ICON} alt="" />
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
