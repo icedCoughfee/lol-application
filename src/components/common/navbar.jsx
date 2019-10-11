@@ -3,6 +3,9 @@ import { Link, withRouter } from "react-router-dom";
 import constants from "../../constants/constants";
 
 class Navbar extends Component {
+  state = {
+    mobile: false,
+  };
   render() {
     const { navItems, location } = this.props;
     return (
@@ -16,12 +19,18 @@ class Navbar extends Component {
           data-toggle="collapse"
           data-target="#navbarNavDropdown"
           aria-controls="navbarNavDropdown"
-          aria-expanded="false"
+          aria-expanded={this.state.mobile}
           aria-label="Toggle navigation"
+          onClick={() => this.toggleMobile()}
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNavDropdown">
+        <div
+          className={`collapse navbar-collapse ${
+            this.state.mobile ? "show" : ""
+          }`}
+          id="navbarNavDropdown"
+        >
           <ul className="navbar-nav">
             <li
               className={`nav-item ${this.navItemActive(
@@ -54,6 +63,10 @@ class Navbar extends Component {
 
   navItemActive = (item, appLocation) =>
     item.path === appLocation ? "active" : "";
+
+  toggleMobile = () => {
+    this.setState({ mobile: !this.state.mobile });
+  };
 }
 
 export default withRouter(Navbar);
