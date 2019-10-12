@@ -42,7 +42,12 @@ class App extends Component {
                   path="/champions"
                   render={() => <Champions champions={champions} />}
                 />
-                <Route path="/summoner/:name" component={SummonerProfile} />
+                <Route
+                  path="/summoner/:name"
+                  render={props => (
+                    <SummonerProfile champions={champions} {...props} />
+                  )}
+                />
                 <Route path="/" component={Home} />
               </Switch>
             </div>

@@ -5,6 +5,7 @@ import Banner from "./common/banner";
 import { getMostPlayedChampion } from "../fakeSummoners";
 import { translateInconsistency } from "../constants/inconsistencies";
 import MatchHistory from "./matchHistory";
+import Loading from "./hoc/loading";
 
 class SummonerProfile extends Component {
   state = {
@@ -64,4 +65,4 @@ class SummonerProfile extends Component {
   };
 }
 
-export default SummonerProfile;
+export default Loading("champions")(SummonerProfile);
