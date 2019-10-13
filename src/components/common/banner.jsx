@@ -1,10 +1,11 @@
 import React from "react";
 import utility from "./utility/component-actions";
+import PropTypes from "prop-types";
 
 const Banner = props => {
   const { title, subtitle, imgSrc, classes } = props;
   const styles = {
-    backgroundImage: `url(${imgSrc})`,
+    backgroundImage: `url(${imgSrc})`
   };
 
   return (
@@ -19,6 +20,13 @@ const Banner = props => {
       </div>
     </div>
   );
+};
+
+Banner.propTypes = {
+  title: PropTypes.string,
+  subtitle: PropTypes.string,
+  imgSrc: PropTypes.string,
+  classes: PropTypes.string
 };
 
 export default Banner;

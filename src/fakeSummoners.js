@@ -1600,12 +1600,8 @@ const championMastery = [{
     }
 ]
 
-export function getChampionMastery() {
-    return championMastery;
-}
-
-export function getMostPlayedChampion(champions) {
-    const mastery = [...getChampionMastery()].sort((a, b) => b.championPoints - a.championPoints);
+export function getMostPlayedChampion(masteries, champions) {
+    const mastery = masteries.sort((a, b) => b.championPoints - a.championPoints);
     return getChampionById(champions, mastery[0].championId)
 }
 

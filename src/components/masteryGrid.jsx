@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getChampionMastery } from "../fakeSummoners";
+
 import { getChampionById, getChampionTags } from "../champions";
 import MasteryCard from "./masteryCard";
 import { getMasteryTags } from "../mastery";
@@ -8,8 +8,8 @@ import constants from "../constants/constants";
 
 class MasteryGrid extends Component {
   render() {
-    const { champions } = this.props;
-    const masteries = [...getChampionMastery()].map(mastery => {
+    const { champions, masteries } = this.props;
+    const summonerMasteries = masteries.map(mastery => {
       const masteryWithCmastery = { ...mastery };
       const champion = { ...getChampionById(champions, mastery.championId) };
       champion["mastery"] = masteryWithCmastery;
@@ -17,7 +17,7 @@ class MasteryGrid extends Component {
     });
     return (
       <ItemGrid
-        items={masteries}
+        items={summonerMasteries}
         itemFilterOptions={getChampionTags()}
         currentFilter={constants.DEFAULT_FILTER}
         sortOptions={getMasteryTags()}

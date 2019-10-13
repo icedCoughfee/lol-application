@@ -15,8 +15,8 @@ class App extends Component {
     champions: [],
     navItems: [
       { name: "Champions", path: "/champions" },
-      { name: "Summoners", path: "/summoners" },
-    ],
+      { name: "Summoners", path: "/summoners" }
+    ]
   };
 
   async componentDidMount() {

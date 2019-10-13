@@ -6,26 +6,56 @@ import { getMostPlayedChampion } from "../fakeSummoners";
 import { translateInconsistency } from "../constants/inconsistencies";
 import MatchHistory from "./matchHistory";
 import Loading from "./hoc/loading";
+import { getChampionMastery } from "../services/masteryService";
+import { getSummoner } from "../services/summonerService";
+import _ from "lodash";
 
 class SummonerProfile extends Component {
   state = {
     masteryVisbility: false,
     matchHistoryVisibility: false,
+    masteries: [],
+    summoner: {}
   };
+
+  async componentDidMount() {
+    const summonerName = this.props.match.params.name;
+    const { data: masteries } = await getChampionMastery(summonerName);
+    const { data: summoner } = await getSummoner(summonerName);
+    this.setState({ masteries, summoner });
+  }
+
   render() {
     const { champions } = this.props;
-    const champion = getMostPlayedChampion(champions);
-    const { name, title, id } = champion;
-    const cleanChampId = translateInconsistency(id);
-    const imgSrc = `${process.env.REACT_APP_CHAMPION_SPLASH_URL}/${cleanChampId}_0.jpg`;
-    return (
-      <React.Fragment>
+    const { masteries, summoner } = this.state;
+    const displayName = summoner.name;
+    // start most played banner creation
+    let MP_Banner = () => (
+      <Banner
+        title={displayName}
+        subtitle={""}
+        imgSrc={""}
+        classes={"basic-banner"}
+      />
+    );
+    if (!_.isEmpty(champions) && !_.isEmpty(masteries)) {
+      const champion = getMostPlayedChampion(masteries, champions);
+      const { title, id } = champion;
+      const cleanChampId = translateInconsistency(id);
+      const imgSrc = `${process.env.REACT_APP_CHAMPION_SPLASH_URL}/${cleanChampId}_0.jpg`;
+      MP_Banner = () => (
         <Banner
-          title={name}
+          title={displayName}
           subtitle={title}
           imgSrc={imgSrc}
           classes={"basic-banner"}
         />
+      );
+    }
+
+    return (
+      <React.Fragment>
+        <MP_Banner />
         <button
           className="btn btn-primary m-2"
           onClick={() => this.handleToggleButtonContent("masteryVisbility")}
@@ -46,7 +76,7 @@ class SummonerProfile extends Component {
         </button>
         <Fade in={this.state.masteryVisbility}>
           <div className="fade" id="masteryGrid">
-            <MasteryGrid champions={champions} />
+            <MasteryGrid champions={champions} masteries={masteries} />
           </div>
         </Fade>
         <Fade in={this.state.matchHistoryVisibility}>
@@ -60,7 +90,7 @@ class SummonerProfile extends Component {
 
   handleToggleButtonContent = stateElementVisibility => {
     this.setState({
-      [stateElementVisibility]: !this.state[stateElementVisibility],
+      [stateElementVisibility]: !this.state[stateElementVisibility]
     });
   };
 }
