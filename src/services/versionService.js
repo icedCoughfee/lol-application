@@ -8,7 +8,6 @@ export async function getCurrentPatch() {
     const {
         data: versions
     } = await getAllVersions();
-    console.log("inside getCurrentPatch", versions)
     if (versions) {
         return versions[0];
     }

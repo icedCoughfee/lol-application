@@ -15,13 +15,13 @@ class SummonerProfile extends Component {
     masteryVisbility: false,
     matchHistoryVisibility: false,
     masteries: [],
-    summoner: {}
+    summoner: {},
   };
 
   async componentDidMount() {
     const summonerName = this.props.match.params.name;
-    const { data: masteries } = await getChampionMastery(summonerName);
-    const { data: summoner } = await getSummoner(summonerName);
+    const masteries = await getChampionMastery(summonerName);
+    const summoner = await getSummoner(summonerName);
     this.setState({ masteries, summoner });
   }
 
@@ -90,7 +90,7 @@ class SummonerProfile extends Component {
 
   handleToggleButtonContent = stateElementVisibility => {
     this.setState({
-      [stateElementVisibility]: !this.state[stateElementVisibility]
+      [stateElementVisibility]: !this.state[stateElementVisibility],
     });
   };
 }
