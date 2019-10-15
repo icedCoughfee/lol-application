@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Champions from "./components/champions";
 import ChampionProfile from "./components/championProfile";
 import SummonerProfile from "./components/summonerProfile";
+import { getCurrentPatch } from "./services/versionService";
 import { getChampions } from "./services/championService";
 import Home from "./components/home";
 import _ from "lodash";
@@ -15,14 +16,16 @@ class App extends Component {
     champions: [],
     navItems: [
       { name: "Champions", path: "/champions" },
-      { name: "Summoners", path: "/summoners" }
-    ]
+      { name: "Summoners", path: "/summoners" },
+    ],
   };
 
   async componentDidMount() {
-    const { data: getChampionResponse } = await getChampions();
+    const version = await getCurrentPatch();
+    const { data: getChampionResponse } = await getChampions(version);
     const { data: champions } = getChampionResponse;
     this.setState({ champions: _.values(champions) });
+    this.setState({ version });
   }
 
   render() {
