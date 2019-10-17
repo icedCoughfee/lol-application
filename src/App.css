@@ -75,6 +75,15 @@ nav img {
   display: block;
 }
 
+.mastery-card {
+  background-color: white;
+}
+
+.mastery-card:hover {
+  background-color: #f8f8f8;
+  border: 1px solid #ffd700;
+}
+
 .mastery-card .progress {
   height: 2rem;
   margin-top: 10px;
