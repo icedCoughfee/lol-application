@@ -1,97 +1,88 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import Fade from "react-bootstrap/Fade";
 import MasteryGrid from "./masteryGrid";
 import Banner from "./common/banner";
 import { getMostPlayedChampion } from "../fakeSummoners";
-import { translateInconsistency } from "../constants/inconsistencies";
 import MatchHistory from "./matchHistory";
 import { getChampionMastery } from "../services/masteryService";
 import { getSummoner } from "../services/summonerService";
+import { getChampionSplash } from "../champions";
 import _ from "lodash";
 
-class SummonerProfile extends Component {
-  state = {
-    masteryVisbility: false,
-    matchHistoryVisibility: false,
-    masteries: [],
-    summoner: {}
-  };
+const SummonerProfile = props => {
+  const [masteries, setMasteries] = useState([]);
+  const [summoner, setSummoner] = useState([]);
+  const [mostPlayedChampion, setMostPlayedChampion] = useState({});
+  const masteryVisbile = useToggleButtonContent(false);
+  const matchHistoryVisible = useToggleButtonContent(false);
+  const { champions } = props;
 
-  async componentDidMount() {
-    const summonerName = this.props.match.params.name;
-    const masteries = await getChampionMastery(summonerName);
-    const summoner = await getSummoner(summonerName);
-    this.setState({ masteries, summoner });
-  }
+  // initialize the depencies
+  useEffect(() => {
+    const fetchData = async () => {
+      const summonerName = props.match.params.name;
+      await getChampionMastery(summonerName).then(masteries => {
+        setMasteries(masteries);
+        const champion = getMostPlayedChampion(masteries, champions);
+        setMostPlayedChampion({
+          champion: champion,
+          img: getChampionSplash(champion)
+        });
+      });
+      const summoner = await getSummoner(summonerName);
+      setSummoner(summoner);
+    };
+    fetchData();
+  }, []);
 
-  render() {
-    const { champions } = this.props;
-    const { masteries, summoner } = this.state;
-    const displayName = summoner.name;
-    // start most played banner creation
-    let MP_Banner = () => (
+  return (
+    <React.Fragment>
       <Banner
-        title={displayName}
+        title={summoner.name}
         subtitle={""}
-        imgSrc={""}
+        imgSrc={mostPlayedChampion.img}
         classes={"basic-banner"}
       />
-    );
-    if (!_.isEmpty(champions) && !_.isEmpty(masteries)) {
-      const champion = getMostPlayedChampion(masteries, champions);
-      const { title, id } = champion;
-      const cleanChampId = translateInconsistency(id);
-      const imgSrc = `${process.env.REACT_APP_CHAMPION_SPLASH_URL}/${cleanChampId}_0.jpg`;
-      MP_Banner = () => (
-        <Banner
-          title={displayName}
-          subtitle={title}
-          imgSrc={imgSrc}
-          classes={"basic-banner"}
-        />
-      );
-    }
+      <button
+        className="btn btn-primary m-2"
+        {...masteryVisbile}
+        aria-controls="masteryGrid"
+        aria-expanded={masteryVisbile}
+      >
+        Champion Mastery
+      </button>
+      <button
+        className="btn btn-primary m-2"
+        {...matchHistoryVisible}
+        aria-controls="matchHistory"
+        aria-expanded={matchHistoryVisible}
+      >
+        Match History
+      </button>
+      <Fade in={masteryVisbile.value}>
+        <div className="fade" id="masteryGrid">
+          <MasteryGrid champions={champions} masteries={masteries} />
+        </div>
+      </Fade>
+      <Fade in={matchHistoryVisible.value}>
+        <div className="fade" id="matchHistory">
+          <MatchHistory />
+        </div>
+      </Fade>
+    </React.Fragment>
+  );
+};
 
-    return (
-      <React.Fragment>
-        <MP_Banner />
-        <button
-          className="btn btn-primary m-2"
-          onClick={() => this.handleToggleButtonContent("masteryVisbility")}
-          aria-controls="masteryGrid"
-          aria-expanded={this.state.masteryVisbility}
-        >
-          Champion Mastery
-        </button>
-        <button
-          className="btn btn-primary m-2"
-          onClick={() =>
-            this.handleToggleButtonContent("matchHistoryVisibility")
-          }
-          aria-controls="matchHistory"
-          aria-expanded={this.state.matchHistoryVisibility}
-        >
-          Match History
-        </button>
-        <Fade in={this.state.masteryVisbility}>
-          <div className="fade" id="masteryGrid">
-            <MasteryGrid champions={champions} masteries={masteries} />
-          </div>
-        </Fade>
-        <Fade in={this.state.matchHistoryVisibility}>
-          <div className="fade" id="matchHistory">
-            <MatchHistory />
-          </div>
-        </Fade>
-      </React.Fragment>
-    );
-  }
-
-  handleToggleButtonContent = stateElementVisibility => {
-    this.setState({
-      [stateElementVisibility]: !this.state[stateElementVisibility]
-    });
+const useToggleButtonContent = initialValue => {
+  const [value, setValue] = useState(initialValue);
+  const handleClick = () => {
+    setValue(!value);
   };
-}
+
+  return {
+    value,
+    onClick: handleClick
+  };
+};
 
 export default SummonerProfile;
