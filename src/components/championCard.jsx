@@ -24,7 +24,7 @@ class ChampionCard extends Component {
       >
         <h5 className="card-title">{champTitle}</h5>
         <p className="card-text">{champion.title}</p>
-        <SimpleLink linkTo={pathname} item={champion} classes="btn btn-primary">
+        <SimpleLink linkTo={pathname} classes="btn btn-primary">
           {pathname ? "Learn More" : ""}
         </SimpleLink>
       </ItemCard>

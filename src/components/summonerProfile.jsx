@@ -5,7 +5,6 @@ import Banner from "./common/banner";
 import { getMostPlayedChampion } from "../fakeSummoners";
 import { translateInconsistency } from "../constants/inconsistencies";
 import MatchHistory from "./matchHistory";
-import Loading from "./hoc/loading";
 import { getChampionMastery } from "../services/masteryService";
 import { getSummoner } from "../services/summonerService";
 import _ from "lodash";
@@ -15,7 +14,7 @@ class SummonerProfile extends Component {
     masteryVisbility: false,
     matchHistoryVisibility: false,
     masteries: [],
-    summoner: {},
+    summoner: {}
   };
 
   async componentDidMount() {
@@ -90,9 +89,9 @@ class SummonerProfile extends Component {
 
   handleToggleButtonContent = stateElementVisibility => {
     this.setState({
-      [stateElementVisibility]: !this.state[stateElementVisibility],
+      [stateElementVisibility]: !this.state[stateElementVisibility]
     });
   };
 }
 
-export default Loading("champions")(SummonerProfile);
+export default SummonerProfile;
