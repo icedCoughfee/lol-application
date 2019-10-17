@@ -20,7 +20,7 @@ class ChampionCard extends Component {
         imgSrc={imgSrc}
         linkText={"Learn More"}
         linkTo={pathname}
-        customCardClass={"champion-card"}
+        customCardClass={"champion-card fade-in"}
       >
         <h5 className="card-title">{champTitle}</h5>
         <p className="card-text">{champion.title}</p>

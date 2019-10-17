@@ -62,8 +62,12 @@ nav img {
   color: black;
 }
 
+.champion-card {
+  background-color: slategrey;
+}
+
 .champion-card:hover {
-  background-color: #f8f8f8;
+  background-color: lightslategrey;
   border: 1px solid #ffd700;
 }
 
