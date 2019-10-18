@@ -8,7 +8,7 @@ class ItemGrid extends Component {
     itemFilterOptions: this.props.filterOptions,
     currentFilter: this.props.currentFilter,
     currentSortProperty: this.props.currentSortProperty,
-    searchQuery: "",
+    searchQuery: ""
   };
   render() {
     const { currentFilter, currentSortProperty, searchQuery } = this.state;
@@ -22,7 +22,7 @@ class ItemGrid extends Component {
       sortBaseProperties,
       searchProperty,
       cardType: CardType,
-      customCardClass,
+      customCardClass
     } = this.props;
 
     // search
@@ -85,7 +85,6 @@ class ItemGrid extends Component {
 
   customSort = (prop, arr) => {
     arr.sort((a, b) => {
-      var i = 0;
       return _.get(b, prop) - _.get(a, prop);
     });
     return arr;
@@ -95,7 +94,7 @@ class ItemGrid extends Component {
     this.setState({
       currentFilter: this.props.currentFilter,
       currentSortProperty: this.props.currentSortProperty,
-      searchQuery: "",
+      searchQuery: ""
     });
   };
 

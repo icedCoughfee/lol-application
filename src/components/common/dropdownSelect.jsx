@@ -32,7 +32,6 @@ class DropdownSelect extends Component {
         >
           <a
             className="dropdown-item"
-            href="#"
             onClick={() => onDropdownChange(defaultOption)}
           >
             {defaultOption}
@@ -41,7 +40,6 @@ class DropdownSelect extends Component {
             <a
               key={option}
               className="dropdown-item"
-              href="#"
               onClick={() => onDropdownChange(option)}
             >
               {option}

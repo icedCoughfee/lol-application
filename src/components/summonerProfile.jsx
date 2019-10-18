@@ -7,7 +7,6 @@ import MatchHistory from "./matchHistory";
 import { getChampionMastery } from "../services/masteryService";
 import { getSummoner } from "../services/summonerService";
 import { getChampionSplash } from "../champions";
-import _ from "lodash";
 
 const SummonerProfile = props => {
   const [masteries, setMasteries] = useState([]);
@@ -33,7 +32,7 @@ const SummonerProfile = props => {
       setSummoner(summoner);
     };
     fetchData();
-  }, []);
+  }, [champions, props.match.params.name]);
 
   return (
     <React.Fragment>

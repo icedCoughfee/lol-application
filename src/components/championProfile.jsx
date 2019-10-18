@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Banner from "./common/banner";
 import { getChampion } from "../services/championService";
 import { getChampionSplash } from "../champions";
-import _ from "lodash";
 
 const ChampionProfile = props => {
   const [isLoading, setIsLoading] = useState(true);
@@ -20,7 +19,7 @@ const ChampionProfile = props => {
     };
 
     fetchChampion();
-  }, []);
+  }, [props]);
 
   return (
     <React.Fragment>
